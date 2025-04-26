@@ -17,121 +17,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      {/* Navbar */}
-      <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-sm shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center"
-            >
-              <span 
-                onClick={() => router.push('/')}
-                className="text-2xl font-bold text-cyan-900 cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                Beykonak
-              </span>
-            </motion.div>
-            
-            {/* Desktop Menu */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-center space-x-8">
-                {menuItems.map((item) => (
-                  <a
-                    key={item}
-                    href={item === 'Ana Sayfa' ? '/' : 
-                         item === 'Projeler' ? '/projeler' : 
-                         `#${item.toLowerCase()}`}
-                    onClick={(e) => {
-                      if (item === 'İletişim') {
-                        e.preventDefault();
-                        handleContactClick();
-                      }
-                    }}
-                    className="text-gray-700 hover:text-cyan-900 transition-colors font-medium"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <motion.div
-                  animate={isMobileMenuOpen ? "open" : "closed"}
-                  className="w-6 h-5 flex flex-col justify-between"
-                >
-                  <motion.span
-                    variants={{
-                      closed: { rotate: 0, y: 0 },
-                      open: { rotate: 45, y: 9 },
-                    }}
-                    className="w-full h-0.5 bg-gray-600 block rounded-full"
-                  />
-                  <motion.span
-                    variants={{
-                      closed: { opacity: 1 },
-                      open: { opacity: 0 },
-                    }}
-                    className="w-full h-0.5 bg-gray-600 block rounded-full"
-                  />
-                  <motion.span
-                    variants={{
-                      closed: { rotate: 0, y: 0 },
-                      open: { rotate: -45, y: -9 },
-                    }}
-                    className="w-full h-0.5 bg-gray-600 block rounded-full"
-                  />
-                </motion.div>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {isMobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden overflow-hidden"
-              >
-                <div className="py-3 space-y-3 border-t border-gray-200">
-                  {menuItems.map((item) => (
-                    <motion.a
-                      key={item}
-                      href={item === 'Ana Sayfa' ? '/' : 
-                          item === 'Projeler' ? '/projeler' : 
-                          item === 'İletişim' ? '#' : 
-                          `#${item.toLowerCase()}`}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-navy-800 rounded-lg transition-colors"
-                      onClick={(e) => {
-                        if (item === 'İletişim') {
-                          e.preventDefault();
-                          handleContactClick();
-                        }
-                        setIsMobileMenuOpen(false);
-                      }}
-                    >
-                      {item}
-                    </motion.a>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </nav>
-
       {/* Hero Section - Güncellendi */}
       <header className="relative h-screen flex items-center justify-center pt-20">
         <div className="absolute inset-0">
@@ -214,13 +99,25 @@ export default function Home() {
           </motion.h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-lg md:max-w-none mx-auto">
             {[
-              'Konut Projeleri', 
-              'Ticari Yapılar', 
-              'Mimari Tasarım',
-              'Vinç Kiralama'
+              { 
+                title: 'Konut Projeleri',
+                desc: 'Modern ve konforlu yaşam alanları tasarlıyor, yüksek kalite standartlarında inşa ediyoruz.'
+              },
+              { 
+                title: 'Ticari Yapılar',
+                desc: 'İşlevsellik ve mimari estetiği bir araya getirerek işletmelere değer katan ticari yapılar tasarlıyoruz ve inşa ediyoruz.'
+              },
+              { 
+                title: 'Mimari Tasarım',
+                desc: 'Özgün ve sürdürülebilir tasarımlarla projelerinize değer katıyoruz.'
+              },
+              { 
+                title: 'Vinç Kiralama',
+                desc: 'Çeşitli kapasitelere sahip vinç seçeneklerimizle, ihtiyacınıza uygun pratik çözümler sunuyoruz.'
+              }
             ].map((service, index) => (
               <motion.div
-                key={service}
+                key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ 
@@ -243,7 +140,7 @@ export default function Home() {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.3 }}
                 >
-                  {service}
+                  {service.title}
                 </motion.h3>
                 <motion.p 
                   className="text-sm md:text-base text-gray-600"
@@ -251,7 +148,7 @@ export default function Home() {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.4 }}
                 >
-                  Profesyonel ekibimizle en kaliteli hizmeti sunuyoruz.
+                  {service.desc}
                 </motion.p>
               </motion.div>
             ))}
@@ -281,10 +178,11 @@ export default function Home() {
               </h2>
               <div className="space-y-3 md:space-y-4 text-sm sm:text-base text-gray-600">
                 <p>
-                  2015 yılında kurulan Beykonak İnşaat, modern mimari ve sürdürülebilir yapı teknolojilerini harmanlayan yenilikçi bir inşaat şirketidir.
+                Beykonak İnşaat ve Mimarlık, konut projelerinden endüstriyel yapılara kadar farklı ölçek ve ihtiyaçlara hitap eden, kapsamlı bir tasarım ve uygulama hizmeti sunmaktadır.
                 </p>
                 <p>
-                  Kısa sürede sektörde önemli bir konuma gelen şirketimiz, her projede çevreye duyarlı, enerji verimli ve akıllı bina sistemlerini entegre ederek, yaşam alanlarının geleceğini şekillendirmektedir.
+                Mimari tasarımı mühendislik bilgisiyle birleştirerek hem sağlam hem de kullanışlı yapılar ortaya koyuyoruz. Fabrika, şantiye gibi teknik yapılarda sahaya uygun çözümler sunarken, konut projelerinde ise rahat ve yaşanabilir alanlar tasarlamaya özen gösteriyoruz.
+
                 </p>
                 <p>
                   Genç ve dinamik ekibimizle, teknolojik gelişmeleri yakından takip ederek, müşterilerimize en yüksek kalitede hizmet sunmaya devam ediyoruz.
@@ -298,7 +196,7 @@ export default function Home() {
                 className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl md:text-4xl text-cyan-900">8+</span>
+                  <span className="text-3xl md:text-4xl text-cyan-900">10+</span>
                   <span className="text-sm md:text-base text-gray-600">Yıllık<br/>Deneyim</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -561,45 +459,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Beykonak İnşaat</h3>
-              <p className="text-gray-400">Yenilikçi ve sürdürülebilir yapıların adresi</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">İletişim</h4>
-              <address className="text-gray-400 not-italic">
-                <p>Merkez Ofis:</p>
-                <p>İstanbul, Türkiye</p>
-                <p>Tel: +90 (555) 123 45 67</p>
-              </address>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Hızlı Bağlantılar</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Hakkımızda</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Projeler</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Kariyer</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Sosyal Medya</h4>
-              <div className="flex space-x-4">
-                {['LinkedIn', 'Instagram', 'Twitter'].map((social) => (
-                  <a key={social} href="#" className="text-gray-400 hover:text-white transition-colors">
-                    {social}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2024 Beykonak İnşaat. Tüm hakları saklıdır.</p>
-          </div>
-        </div>
-      </footer>
+      
     </div>
   );
 }
