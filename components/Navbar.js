@@ -2,10 +2,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import { useContactModal } from '@/context/ContactModalContext';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const { handleContactClick } = useContactModal();
   const router = useRouter();
 
   const menuItems = ['Ana Sayfa', 'Hakkımızda', 'Projeler', 'Hizmetler', 'İletişim'];
@@ -35,11 +36,15 @@ export default function Navbar() {
                           key={item}
                           href={item === 'Ana Sayfa' ? '/' : 
                                item === 'Projeler' ? '/projeler' : 
-                               `#${item.toLowerCase()}`}
+                               item === 'İletişim' ? '#' :
+                               `/${item.toLowerCase()}`}
                           onClick={(e) => {
                             if (item === 'İletişim') {
                               e.preventDefault();
                               handleContactClick();
+                            } else if (item !== 'Ana Sayfa' && item !== 'Projeler') {
+                              e.preventDefault();
+                              router.push(`/#${item.toLowerCase()}`);
                             }
                           }}
                           className="text-gray-700 hover:text-cyan-900 transition-colors font-medium"
@@ -101,8 +106,8 @@ export default function Navbar() {
                             key={item}
                             href={item === 'Ana Sayfa' ? '/' : 
                                 item === 'Projeler' ? '/projeler' : 
-                                item === 'İletişim' ? '#' : 
-                                `#${item.toLowerCase()}`}
+                                item === 'İletişim' ? '#' :
+                                `/#${item.toLowerCase()}`}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -10 }}
@@ -111,6 +116,9 @@ export default function Navbar() {
                               if (item === 'İletişim') {
                                 e.preventDefault();
                                 handleContactClick();
+                              } else if (item !== 'Ana Sayfa' && item !== 'Projeler') {
+                                e.preventDefault();
+                                router.push(`/#${item.toLowerCase()}`);
                               }
                               setIsMobileMenuOpen(false);
                             }}
