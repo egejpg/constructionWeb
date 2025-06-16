@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { useContactModal } from '@/context/ContactModalContext';
+import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -287,7 +288,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section - Form eklendi */}
+      {/* Contact Section */}
       <section className="bg-gray-50 py-20 px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           <motion.h2 
@@ -306,61 +307,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="bg-white p-8 rounded-xl shadow-lg"
           >
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2" htmlFor="name">
-                    Ad Soyad
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors placeholder:text-gray-500"
-                    placeholder="Adınız Soyadınız"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2" htmlFor="email">
-                    E-posta
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors placeholder:text-gray-500"
-                    placeholder="ornek@email.com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-2" htmlFor="phone">
-                  Telefon
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors placeholder:text-gray-500"
-                  placeholder="(5XX) XXX XX XX"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-2" htmlFor="message">
-                  Mesajınız
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors resize-none placeholder:text-gray-500"
-                  placeholder="Mesajınızı buraya yazın..."
-                ></textarea>
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-cyan-900 to-cyan-800 text-white py-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Gönder
-              </motion.button>
-            </form>
+            <ContactForm />
           </motion.div>
         </div>
       </section>

@@ -11,7 +11,7 @@ const merriweather = Merriweather_Sans({
 });
 
 export const metadata = {
-  title: 'Beykonak İnşaat',
+  title: 'Beykonak',
   description: 'Geleceğin Yapılarını İnşa Ediyoruz',
 }
 
