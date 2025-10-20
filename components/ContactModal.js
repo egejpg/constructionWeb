@@ -85,12 +85,13 @@ export default function ContactModal() {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
+                      <input type="text" name="website" style={{ display: "none" }} tabIndex="-1" autoComplete="off" {...register("website")}/>
+
                       <label className="block text-gray-700 font-medium mb-2">Ad Soyad</label>
                       <input
                         {...register('name')}
-                        className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${
-                          errors.name ? 'border-red-500' : 'border-gray-300'
-                        } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors`}
+                        className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${errors.name ? 'border-red-500' : 'border-gray-300'
+                          } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors`}
                       />
                       {errors.name && (
                         <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -100,9 +101,8 @@ export default function ContactModal() {
                       <label className="block text-gray-700 font-medium mb-2">E-posta</label>
                       <input
                         {...register('email')}
-                        className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${
-                          errors.email ? 'border-red-500' : 'border-gray-300'
-                        } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors`}
+                        className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${errors.email ? 'border-red-500' : 'border-gray-300'
+                          } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors`}
                       />
                       {errors.email && (
                         <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -113,9 +113,8 @@ export default function ContactModal() {
                     <label className="block text-gray-700 font-medium mb-2">Telefon</label>
                     <input
                       {...register('phone')}
-                      className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${
-                        errors.phone ? 'border-red-500' : 'border-gray-300'
-                      } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors`}
+                      className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${errors.phone ? 'border-red-500' : 'border-gray-300'
+                        } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors`}
                     />
                     {errors.phone && (
                       <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
@@ -126,9 +125,8 @@ export default function ContactModal() {
                     <textarea
                       {...register('message')}
                       rows={4}
-                      className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${
-                        errors.message ? 'border-red-500' : 'border-gray-300'
-                      } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors resize-none`}
+                      className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${errors.message ? 'border-red-500' : 'border-gray-300'
+                        } focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors resize-none`}
                     />
                     {errors.message && (
                       <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
@@ -138,9 +136,8 @@ export default function ContactModal() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     disabled={isSubmitting}
-                    className={`w-full bg-gradient-to-r from-cyan-900 to-cyan-800 text-white py-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300 ${
-                      isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
+                    className={`w-full bg-gradient-to-r from-cyan-900 to-cyan-800 text-white py-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                      }`}
                   >
                     {isSubmitting ? 'Gönderiliyor...' : 'Gönder'}
                   </motion.button>
