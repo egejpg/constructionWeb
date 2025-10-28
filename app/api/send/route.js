@@ -24,7 +24,7 @@ export async function POST(request) {
 
     const { name, email, phone, message, website } = await request.json();
 
-    if (website && website.trim() !== "") {
+    if (website) {
       return NextResponse.json({ error: "Bot detected" }, { status: 400 });
     }
 
