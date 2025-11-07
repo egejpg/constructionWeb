@@ -52,6 +52,7 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
+              <input type="text" name="website" style={{ display: "none" }} tabIndex="-1" autoComplete="off" {...register("website")}/>
               <label className="block text-gray-700 font-medium mb-2">Ad Soyad</label>
               <input
                 {...register('name')}
